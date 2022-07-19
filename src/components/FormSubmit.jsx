@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function FormSubmit(props) {
+  const [inputTitle, setInputTitle] = useState("");
 
-  const [inputTitle, setInputTitle] = useState('');
+  const [inputCate, setInputCate] = useState("");
 
-  const [inputCate, setInputCate] = useState('');
+  const handleChangeTitle = (e) => {
+    setInputTitle(e.target.value);
+  };
 
-  const handleChangeTitle = e => {
-    setInputTitle(e.target.value)
-  }
+  const handleChangeCate = (e) => {
+    setInputCate(e.target.value);
+  };
 
-  const handleChangeCate = e => {
-    setInputCate(e.target.value)
-  }
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     props.onSubmit({
-      // id: Math.floor(Math.random() * 1000),
       title: inputTitle,
       cate: inputCate,
-      // isDone: true
-    })
-    setInputTitle('');
-    setInputCate('');
-  }
+    });
+
+    setInputTitle("");
+    setInputCate("");
+  };
 
   return (
     <form className="Form-Sub" onSubmit={handleSubmit}>
       <div className="input-group">
-        <span className="input-group-text input-group-text-border" >To Do</span>
+        <span className="input-group-text input-group-text-border">To Do</span>
         <input
           type="text"
           className="form-control"
@@ -41,8 +39,9 @@ function FormSubmit(props) {
           required
         />
 
-        <span className="input-group-text"
-        style={{borderLeft: 0, borderRight: 0}}
+        <span
+          className="input-group-text"
+          style={{ borderLeft: 0, borderRight: 0 }}
         >
           Category
         </span>
@@ -61,4 +60,4 @@ function FormSubmit(props) {
   );
 }
 
-export default FormSubmit
+export default FormSubmit;

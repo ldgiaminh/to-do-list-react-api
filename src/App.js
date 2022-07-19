@@ -1,6 +1,6 @@
-import './App.css'
-import FormHeader from './components/FormHeader'
-import FormTask from './components/FormTask'
+import "./App.css";
+
+import FormTask from "./components/FormTask";
 
 function App() {
   return (
@@ -10,7 +10,16 @@ function App() {
           <div className="col-md-12 col-xl-10">
             <div className="mask-custom card ">
               <div className="card-body p-4 text-white">
-                <FormHeader />
+                <div className="text-center pt-3 pb-2">
+                  <img
+                    src={
+                      "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                    }
+                    className="App-logo"
+                    alt="Check"
+                  />
+                  <h1 className="my-4">To Do List</h1>
+                </div>
                 <FormTask />
               </div>
             </div>

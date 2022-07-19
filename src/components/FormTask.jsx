@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import FormActions from './FormActions';
-import FormSubmit from './FormSubmit';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import FormActions from "./FormActions";
+import FormSubmit from "./FormSubmit";
 
 function FormTask() {
   const generateAPI = (endpoint) => {
@@ -33,7 +33,7 @@ function FormTask() {
             `https://5f62b7ce67e195001625f17c.mockapi.io/api/${endpoint}/${id}`
           )
           .then((res) => res.data);
-      }
+      },
     };
   };
 
@@ -45,36 +45,31 @@ function FormTask() {
 
   useEffect(() => {
     API.todoApp.getAll().then((data) => setTodos(data));
-  });
+  }, []);
 
-  const addTodo = todo => {
-    if ((!todo.tilte || /^\s*$./.test(todo.title)) && (!todo.cate || /^\s*$./.test(todo.cate))) {
+  const addTodo = (todo) => {
+    if (
+      (!todo.title || /^\s*$./.test(todo.title)) &&
+      (!todo.cate || /^\s*$./.test(todo.cate))
+    ) {
       return;
     }
-    // const newTodos = [todo, ...todos]
-
-    // API.todoApp.create(todo).then((data) => setTodos(newTodos));
 
     API.todoApp.create(todo).then((response) => {
-      const newTodos = [...todos, response]
-      setTodos(newTodos)
-    })
+      const newTodos = [...todos, response];
+      setTodos(newTodos);
+    });
+  };
 
-    // setTodos(newTodos)
-  }
-
-  const removeTodo = id => {
-    const removeTodo = todos.filter(todo => todo.id !== id)
-
-    // setTodos(removeTodo)
+  const removeTodo = (id) => {
+    const removeTodo = todos.filter((todo) => todo.id !== id);
 
     API.todoApp.delete(id).then((data) => setTodos(removeTodo));
+  };
 
-  }
-
-  const completeTodo = id => {
+  const completeTodo = (id) => {
     let todo1;
-    const updatedTodos = todos.map(todo => {
+    const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
         todo.isDone = !todo.isDone;
         todo1 = todo;
@@ -83,15 +78,12 @@ function FormTask() {
     });
 
     API.todoApp.update(id, todo1).then((data) => setTodos(updatedTodos));
-    
-    // setTodos(updatedTodos);
-   
   };
 
   return (
     <React.Fragment>
       <FormSubmit onSubmit={addTodo} />
-      {/* <h3 className='text-center pt-3 pb-2'>What's the Plan for Today ?</h3> */}
+      <h3 className="text-center pt-3 pb-2">What's the Plan for Today ?</h3>
       <table className="table text-white mb-0">
         <thead>
           <tr>
@@ -113,4 +105,4 @@ function FormTask() {
   );
 }
 
-export default FormTask
+export default FormTask;
